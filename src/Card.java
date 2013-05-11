@@ -3,12 +3,14 @@ public class Card {
     private final int card;
     
     public Card(int index) {
+        assert(1 <= index && index < 53);
+        
         this.suit = Suit.values()[index / 4];
-        this.card = index % 13;
+        this.card = ((index - 1) % 13) + 1;
     }
 
     public Card(Suit suit, int card) {
-        if (0 <= card && card < 14) {
+        if (1 <= card && card < 14) {
             this.suit = suit;
             this.card = card;
         } else
