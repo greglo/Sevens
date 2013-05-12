@@ -77,12 +77,11 @@ public class Dealer {
             if (hands.get(player).contains(nextCard) && tower.canPlay(nextCard.getCardIndex())) {
                 System.out.println(player.getName() + " plays " + nextCard.toString());
                 tower.play(nextCard.getCardIndex());
+                for (Player p : players)
+                    p.movePlayed(nextPlayerIndex, nextCard);
             } else
-                throw new SomeoneNoobException(player.getName());
-
-            for (Player p : players)
-                p.movePlayed(nextPlayerIndex, nextCard);
-
+                System.out.println(player.getName() + " failed to play a legal move, turn skipped.");                 
+            
         } else
             System.out.println(player.getName() + " cannot play");
 
