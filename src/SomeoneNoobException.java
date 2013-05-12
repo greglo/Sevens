@@ -1,4 +1,5 @@
 
+@SuppressWarnings("serial")
 public class SomeoneNoobException extends Exception{
     private final String name;
     

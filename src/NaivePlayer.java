@@ -3,10 +3,12 @@ import java.util.Map;
 import java.util.Set;
 
 public class NaivePlayer implements Player {
+    private final String name;
     private Set<Card> hand;
     private Map<Suit, Tower> towers = new HashMap<Suit, Tower>();
 
-    public NaivePlayer() {
+    public NaivePlayer(String name) {
+        this.name = name;
         for (Suit suit : Suit.values())
             towers.put(suit, new Tower());
     }
@@ -36,15 +38,13 @@ public class NaivePlayer implements Player {
                 hand.remove(card);
                 return card;
             }
-            else
-                System.out.println("Cannot play " + card.toString());
         }
         return null;
     }
 
     @Override
     public String getName() {
-        return "Owen";
+        return name;
     }
 
     private class Tower {

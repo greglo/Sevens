@@ -23,14 +23,13 @@ public class Dealer {
             towers.put(suit, new Tower());
     }
 
-    public void addPlayer(Player player) throws GregNoobException {
-        if (!gameStarted || player == null)
+    public void addPlayer(Player player) {
+        if (!gameStarted && player != null)
             if (!players.contains(player)) {
                 players.add(player);
                 hands.put(player, new HashSet<Card>());
                 playerCount++;
-            } else
-                throw new GregNoobException();
+            }
     }
 
     public void deal() {
@@ -56,6 +55,7 @@ public class Dealer {
                 playerCardCount[playerNum]++;
             }
 
+            // Send out the GameConfig and Hands to players
             GameConfig config = new GameConfig(playerCount, playerCardCount);
             for (Player player : players) {
                 player.initialize(config);
@@ -74,17 +74,17 @@ public class Dealer {
         if (nextCard != null) {
             Tower tower = towers.get(nextCard.getSuit());
 
-            if (hands.get(player).contains(nextCard) && tower.canPlay(nextCard.getCardIndex())) {
-                System.out.println(player.getName() + " plays " + nextCard.toString());
+            if (hands.get(player).contains(nextCard) && tower.canPlay(nextCard.getCardIndex()))
                 tower.play(nextCard.getCardIndex());
-            } else
+            else
                 throw new SomeoneNoobException(player.getName());
 
             for (Player p : players)
                 p.movePlayed(nextPlayerIndex, nextCard);
 
-        } else
-            System.out.println(player.getName() + " cannot play");
+        } else if (hasValidMove(player))
+            throw new SomeoneNoobException(player.getName());
+            
 
         nextPlayerIndex = (nextPlayerIndex + 1) % playerCount;
         return player;
@@ -103,6 +103,15 @@ public class Dealer {
     public boolean gameFinished() {
         return (towers.get(Suit.DIAMOND).isClosed() && towers.get(Suit.CLUB).isClosed() && towers.get(Suit.HEART).isClosed() && towers
                 .get(Suit.SPADE).isClosed());
+    }
+    
+    private boolean hasValidMove(Player player) {
+        for (Card card : hands.get(player)) {
+            Tower tower = towers.get(card.getSuit());
+            if (tower.canPlay(card.getCardIndex()))
+                return true;
+        }
+        return false;
     }
 
     private class Tower {
