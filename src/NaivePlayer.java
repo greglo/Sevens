@@ -25,15 +25,19 @@ public class NaivePlayer implements Player {
     public void movePlayed(int index, Card card) {
         if (card != null) {
             Suit suit = card.getSuit();
-            towers.get(suit).play(card.getCard());
+            towers.get(suit).play(card.getCardIndex());
         }
     }
 
     @Override
     public Card play() {
         for (Card card : hand) {
-            if (towers.get(card.getSuit()).canPlay(card.getCard()))
+            if (towers.get(card.getSuit()).canPlay(card.getCardIndex())) {
+                hand.remove(card);
                 return card;
+            }
+            else
+                System.out.println("Cannot play " + card.toString());
         }
         return null;
     }
@@ -44,19 +48,19 @@ public class NaivePlayer implements Player {
     }
 
     private class Tower {
-        int upperBound = 7;
-        int lowerBound = 7;
+        private int upperBound = 7;
+        private int lowerBound = 7;
 
-        public void play(int card) {
-            if (card == upperBound)
+        public void play(int cardIndex) {
+            if (cardIndex == upperBound)
                 upperBound += 1;
 
-            if (card == lowerBound)
+            if (cardIndex == lowerBound)
                 lowerBound -= 1;
         }
 
-        public boolean canPlay(int card) {
-            return card == lowerBound || card == upperBound;
+        public boolean canPlay(int cardIndex) {
+            return cardIndex == lowerBound || cardIndex == upperBound;
         }
     }
 }
