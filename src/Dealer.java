@@ -84,6 +84,7 @@ public class Dealer {
             !hands.get(player).contains(nextCard) ||
             !towers.get(nextCard.getSuit()).canPlay(nextCard.getCardIndex())) {
             nextCard = resort;
+            System.out.println(player.getName() + " is such an movl. You can't play " + nextCard.toString() + " now!");
         }
             
         if (nextCard != null) {
