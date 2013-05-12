@@ -69,22 +69,31 @@ public class Dealer {
             throw new GregNoobException();
 
         Player player = players.get(nextPlayerIndex);
+
+        Card resort;
+        for (Card card : hands.get(player)){
+            Tower tower = towers.get(card.getSuit());
+            if (tower.canPlay(card.getCardIndex()))
+                resort = card;
+        }
+
+
         Card nextCard = player.play();
 
+        if (nextCard == null ||
+            !hands.get(player).contains(nextCard) ||
+            !towers.get(nextCard.getSuit()).canPlay(nextCard.getCardIndex())) {
+            nextCard = resort;
+        }
+            
         if (nextCard != null) {
-            Tower tower = towers.get(nextCard.getSuit());
-
-            if (hands.get(player).contains(nextCard) && tower.canPlay(nextCard.getCardIndex())) {
-                System.out.println(player.getName() + " plays " + nextCard.toString());
-                tower.play(nextCard.getCardIndex());
-            } else
-                throw new SomeoneNoobException(player.getName());
-
+            towers.get(nextCard.getSuit()).play(nextCard.getCardIndex());
+            System.out.println(player.getName() + " plays " + nextCard.toString());
             for (Player p : players)
                 p.movePlayed(nextPlayerIndex, nextCard);
-
-        } else
+        } else {
             System.out.println(player.getName() + " cannot play");
+        }
 
         nextPlayerIndex = (nextPlayerIndex + 1) % playerCount;
         return player;
