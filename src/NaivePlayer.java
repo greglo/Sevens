@@ -44,7 +44,7 @@ public class NaivePlayer implements Player {
 
     @Override
     public String getName() {
-        return "Owen";
+        return "Greg";
     }
 
     private class Tower {
