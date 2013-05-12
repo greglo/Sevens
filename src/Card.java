@@ -5,7 +5,7 @@ public class Card {
     public Card(int index) {
         assert(1 <= index && index < 53);
         
-        this.suit = Suit.values()[index / 4];
+        this.suit = Suit.values()[(index - 1) / 13];
         this.card = ((index - 1) % 13) + 1;
     }
 
@@ -36,7 +36,7 @@ public class Card {
    
    private String cardToString(int card) {
        switch (card) {
-       case 0:  return "Ace";
+       case 1:  return "Ace";
        case 11: return "Jack";
        case 12: return "Queen";
        case 13: return "King";
