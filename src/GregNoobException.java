@@ -1,7 +1,7 @@
 
 @SuppressWarnings("serial")
 public class GregNoobException extends SomeoneNoobException {
-    public GregNoobException() {
-        super("Greg");
+    public GregNoobException(String message) {
+        super("Greg", message);
     }
 }

@@ -15,7 +15,8 @@ public class NaivePlayer implements Player {
 
     @Override
     public void initialize(GameConfig config) {
-
+        for (Suit suit : Suit.values())
+            towers.put(suit, new Tower());
     }
 
     @Override
