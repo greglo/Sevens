@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +18,8 @@ public class Tournament {
         players.add(new NaivePlayer("Owen1"));
         players.add(new NaivePlayer("Owen2"));
         players.add(new NaivePlayer("Owen3"));
+        players.add(new NaivePlayer("Owen4"));
+        players.add(new NaivePlayer("Owen5"));
 
         for (int i = 0; i < TOTAL_GAMES; i++) {
             try {
@@ -29,6 +32,8 @@ public class Tournament {
                     scores.put(winner, scores.get(winner) + 1);
                 else
                     scores.put(winner, 1);
+                
+                Collections.rotate(players, 1);
             } catch (SomeoneNoobException e) {
                 System.out.println(e.getMessage());
                 e.printStackTrace();
