@@ -20,6 +20,8 @@ public class Tournament {
         players.add(new NaivePlayer("Owen3"));
         players.add(new NaivePlayer("Owen4"));
         players.add(new NaivePlayer("Owen5"));
+        int playerCount = players.size();
+        int rotateAmount = 52 % playerCount;
 
         for (int i = 0; i < TOTAL_GAMES; i++) {
             try {
@@ -33,7 +35,7 @@ public class Tournament {
                 else
                     scores.put(winner, 1);
                 
-                Collections.rotate(players, 1);
+                Collections.rotate(players, rotateAmount);
             } catch (SomeoneNoobException e) {
                 System.out.println(e.getMessage());
                 e.printStackTrace();
