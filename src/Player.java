@@ -8,6 +8,8 @@ public interface Player {
      * @param config
      *            Stores how many players there are at the table, and how many
      *            cards each of them have
+     *            Calling this should reset the game state, so one Player object
+     *            can play many hands (sequentially)
      */
     public void initialize(GameConfig config);
 
