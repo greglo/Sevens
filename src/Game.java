@@ -100,14 +100,13 @@ public class Game {
                 gameState.play(card);
                 hands.get(player).remove(card);
             }
-
-            for (Player p : players)
-                p.movePlayed(nextPlayerIndex, card);
-
-        } 
-        // If not, could they have?
-        else if (hasValidMove(player))
-            throw new SomeoneNoobException(player.getName(), "They skipped when they could play a card.");
+        } else if (hasValidMove(player)) {
+                throw new SomeoneNoobException(player.getName(), "They skipped when they could play a card.");
+        }
+        
+        // This should be out here so we also notify of skips as well as valid plays
+        for (Player p : players)
+            p.movePlayed(nextPlayerIndex, card);
 
         nextPlayerIndex = (nextPlayerIndex + 1) % playerCount;
         return player;
