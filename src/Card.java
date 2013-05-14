@@ -24,7 +24,20 @@ public class Card {
     public int getCardIndex() {
         return cardIndex;
     }
-    
+
+    @Override
+    public boolean equals( Object other ) {
+      if( other instanceof Card ) {
+        Card c = (Card) other;
+        return c.suit == suit && c.cardIndex == cardIndex;
+      }
+
+      return false;
+    }
+
+    @Override
+    public int hashCode() { return 13 * suit.ordinal() + cardIndex; }
+
    @Override
    public String toString() {
        return cardToString(cardIndex)
