@@ -38,16 +38,16 @@ public class Card {
     @Override
     public int hashCode() { return 13 * suit.ordinal() + cardIndex; }
 
-   @Override
-   public String toString() {
+    @Override
+    public String toString() {
        return cardToString(cardIndex)
                + " of "
                + suit.toString().substring(0, 1).toUpperCase()
                + suit.toString().substring(1).toLowerCase()
                + "s";
-   }
-   
-   private String cardToString(int card) {
+    }
+
+    private String cardToString(int card) {
        switch (card) {
        case 1:  return "Ace";
        case 11: return "Jack";
@@ -55,5 +55,5 @@ public class Card {
        case 13: return "King";
        default: return Integer.toString(card);
        }
-   }
+    }
 }
