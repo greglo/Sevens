@@ -10,22 +10,23 @@ public class Tournament {
      * @param args
      */
     public static void main(String[] args) {
-        final int TOTAL_GAMES = 1000;
+        final int TOTAL_GAMES = 300000;
         final Map<Player, Integer> scores = new HashMap<Player, Integer>();
 
         List<Player> players = new ArrayList<Player>();
 
-        players.add(new NaivePlayer("Owen1"));
-        players.add(new NaivePlayer("Owen2"));
-        players.add(new NaivePlayer("Owen3"));
-        players.add(new NaivePlayer("Owen4"));
-        players.add(new NaivePlayer("Owen5"));
+        players.add(new NaivePlayer("Naive1"));
+        players.add(new NaivePlayer("Naive2"));
+        players.add(new NaivePlayer("Naive3"));
+        players.add(new NaivePlayer("Naive4"));
+
         int playerCount = players.size();
         int rotateAmount = 52 % playerCount;
 
         for (int i = 0; i < TOTAL_GAMES; i++) {
             try {
                 Game game = new Game();
+                java.util.Collections.shuffle(players); 
                 game.addPlayers(players);
                 game.deal();
                 
